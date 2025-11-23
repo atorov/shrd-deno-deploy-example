@@ -16,5 +16,6 @@
         "rules": {
             "tags": ["recommended"]
         }
-    }
+    },
+    "lock": true
 }

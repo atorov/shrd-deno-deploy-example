@@ -1,0 +1,16 @@
+services:
+  deno-dev:
+    image: denoland/deno:latest
+    working_dir: /app
+    volumes:
+      - .:/app
+      - deno_cache:/deno-dir
+    command: deno task dev
+    ports:
+      - "9001:9001"
+    environment:
+      - DENO_DIR=/deno-dir
+      - PORT=9001
+
+volumes:
+  deno_cache:
