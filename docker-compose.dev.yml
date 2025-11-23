@@ -5,7 +5,7 @@ services:
     volumes:
       - .:/app
       - deno_cache:/deno-dir
-    command: deno task dev
+    command: deno task dev:local
     ports:
       - "9001:9001"
     environment:

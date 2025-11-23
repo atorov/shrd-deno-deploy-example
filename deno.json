@@ -1,7 +1,22 @@
 {
     "tasks": {
-        "dev": "deno run --allow-env --allow-net --watch src/main.ts",
-        "start": "deno run --allow-env --allow-net src/main.ts"
+        "start": "deno run --allow-env --allow-net src/main.ts",
+        "dev": "deno task dev:docker:start",
+        "dev:local": "deno run --allow-env --allow-net --watch src/main.ts",
+        "dev:docker:start": "docker compose -f docker-compose.dev.yml up",
+        "dev:docker:build": "docker compose -f docker-compose.dev.yml up --build",
+        "dev:docker:stop": "docker compose -f docker-compose.dev.yml down",
+        "dev:docker:restart": "deno task dev:docker:stop && deno task dev:docker:start",
+        "dev:docker:logs": "docker compose -f docker-compose.dev.yml logs -f",
+        "dev:docker:prune": "docker compose -f docker-compose.dev.yml down --rmi all -v --remove-orphans",
+        "docker:build": "docker build -t deno-deploy-example .",
+        "docker:start": "docker run -d -p 9001:9001 deno-deploy-example",
+        "docker:stop": "docker stop $(docker ps -q --filter ancestor=deno-deploy-example)",
+        "docker:logs": "docker logs -f $(docker ps -q --filter ancestor=deno-deploy-example)",
+        "docker:prune": "docker rm $(docker ps -a -q --filter ancestor=deno-deploy-example) && docker rmi deno-deploy-example",
+        "docker:restart": "deno task docker:stop && deno task docker:start",
+        "docker:info": "docker images | grep deno-deploy-example",
+        "docker:prod": "deno task docker:prune && deno task docker:build && deno task docker:start"
     },
     "compilerOptions": {
         "strict": true,
