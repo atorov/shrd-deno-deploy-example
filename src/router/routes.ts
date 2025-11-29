@@ -1,3 +1,4 @@
+import { METHOD, type Method } from "@std/http/unstable-method";
 import getHealthHandler from "../handlers/health/get_helath.handler.ts";
 import getSingleItemHandler from "../handlers/items/get_single_item.handler.ts";
 import type { RouteHandler } from "../types/RouteHnadler.ts";
@@ -5,32 +6,20 @@ import type { Route } from "./types.ts";
 
 const routes: Route[] = [];
 
-// Small helpers for registration of routes
-function get(pattern: string, handler: RouteHandler) {
-    routes.push({ method: "GET", pattern, handler });
+// A small helper for registering routes
+function registerRoute(method: Method, pattern: string, handler: RouteHandler) {
+    routes.push({ method, pattern, handler });
 }
-
-// function POST(pattern: string, handler: RouteHandler) {
-//   routes.push({ method: "POST", pattern, handler });
-// }
-
-// function PUT(pattern: string, handler: RouteHandler) {
-//   routes.push({ method: "PUT", pattern, handler });
-// }
-
-// function DELETE(pattern: string, handler: RouteHandler) {
-//   routes.push({ method: "DELETE", pattern, handler });
-// }
 
 // TODO: add root route
 // ...
 
 // Health check
-get("/api/health", getHealthHandler);
+registerRoute(METHOD.Get, "/api/health", getHealthHandler);
 
 // Items routes
 // - Get item
-get("/api/items/:id", getSingleItemHandler);
+registerRoute(METHOD.Get, "/api/items/:id", getSingleItemHandler);
 
 // { method: "POST", pattern: "/items", handler: createItemHandler },
 // { method: "PUT", pattern: "/items/:id", handler: updateItemHandler },
