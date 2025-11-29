@@ -1,3 +1,3 @@
 import type RouteContext from "./RouteContext.ts";
 
-export type RouteHandler = (ctx: RouteContext) => Response | Promise<Response>;
+export type RouteHandler = (ctx: RouteContext) => Promise<Response>;

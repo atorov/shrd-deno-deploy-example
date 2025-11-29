@@ -1,9 +1,9 @@
 import type RouteContext from "../types/RouteContext.ts";
+import notFound from "../utils/routes/not_found.ts";
 import matchPath from "./match_path.ts";
-import notFound from "./not_found.ts";
 import ROUTES from "./routes.ts";
 
-async function routeRequest(req: Request): Promise<Response> {
+function routeRequest(req: Request): Promise<Response> {
     const url = new URL(req.url);
 
     for (const route of ROUTES) {
@@ -13,10 +13,11 @@ async function routeRequest(req: Request): Promise<Response> {
         if (!params) continue;
 
         const ctx: RouteContext = { req, url, params };
-        return await route.handler(ctx);
+
+        return Promise.resolve(route.handler(ctx));
     }
 
-    return notFound();
+    return Promise.resolve(notFound());
 }
 
 export default routeRequest;

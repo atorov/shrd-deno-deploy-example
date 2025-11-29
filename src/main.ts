@@ -2,23 +2,7 @@ import { STATUS_CODE } from "@std/http/status";
 import routeRequest from "./router/route_request.ts";
 import json from "./utils/routes/json.ts";
 
-// // -------------------- Types and in-memory "database" --------------------
-
-// interface Item {
-//   id: number;
-//   name: string;
-// }
-
-// let items: Item[] = [
-//   { id: 1, name: "First item" },
-//   { id: 2, name: "Second item" },
-// ];
-
 // // -------------------- Helper functions --------------------
-
-// function badRequest(message: string): Response {
-//   return json({ error: message }, { status: 400 });
-// }
 
 // // Basic validation for item payload
 // function validateItemPayload(body: unknown):
@@ -59,19 +43,6 @@ import json from "./utils/routes/json.ts";
 
 // // List items
 // GET("/items", () => json(items));
-
-// // Get single item
-// GET("/items/:id", (ctx) => {
-//   const id = Number(ctx.params.id);
-//   if (Number.isNaN(id)) {
-//     return badRequest("Invalid 'id' - must be a number.");
-//   }
-//   const item = items.find((x) => x.id === id);
-//   if (!item) {
-//     return notFound();
-//   }
-//   return json(item);
-// });
 
 // // Create item
 // POST("/items", async (ctx) => {

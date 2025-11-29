@@ -1,11 +1,12 @@
-import getHealth from "../handlers/health/get_helath.handler.ts";
+import getHealthHandler from "../handlers/health/get_helath.handler.ts";
+import getSingleItemHandler from "../handlers/items/get_single_item.handler.ts";
 import type { RouteHandler } from "../types/RouteHnadler.ts";
 import type { Route } from "./types.ts";
 
 const routes: Route[] = [];
 
 // Small helpers for registration of routes
-function GET(pattern: string, handler: RouteHandler) {
+function get(pattern: string, handler: RouteHandler) {
     routes.push({ method: "GET", pattern, handler });
 }
 
@@ -25,9 +26,12 @@ function GET(pattern: string, handler: RouteHandler) {
 // ...
 
 // Health check
-GET("/api/health", getHealth);
+get("/api/health", getHealthHandler);
 
-// { method: "GET", pattern: "/items/:id", handler: getItemHandler },
+// Items routes
+// - Get item
+get("/api/items/:id", getSingleItemHandler);
+
 // { method: "POST", pattern: "/items", handler: createItemHandler },
 // { method: "PUT", pattern: "/items/:id", handler: updateItemHandler },
 
