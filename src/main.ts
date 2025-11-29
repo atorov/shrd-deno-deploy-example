@@ -1,12 +1,8 @@
-// // -------------------- Types and in-memory "database" --------------------
+import { STATUS_CODE } from "@std/http/status";
+import routeRequest from "./router/route_request.ts";
+import json from "./utils/routes/json.ts";
 
-// type JsonValue =
-//   | string
-//   | number
-//   | boolean
-//   | null
-//   | JsonValue[]
-//   | { [key: string]: JsonValue };
+// // -------------------- Types and in-memory "database" --------------------
 
 // interface Item {
 //   id: number;
@@ -19,17 +15,6 @@
 // ];
 
 // // -------------------- Helper functions --------------------
-
-// function json(data: JsonValue, init?: ResponseInit): Response {
-//   return new Response(JSON.stringify(data), {
-//     headers: { "Content-Type": "application/json; charset=utf-8" },
-//     ...init,
-//   });
-// }
-
-// function notFound(): Response {
-//   return json({ error: "Not found" }, { status: 404 });
-// }
 
 // function badRequest(message: string): Response {
 //   return json({ error: message }, { status: 400 });
@@ -62,69 +47,6 @@
 //   };
 // }
 
-// // -------------------- Mini Router --------------------
-
-// interface Context {
-//   req: Request;
-//   url: URL;
-//   params: Record<string, string>;
-// }
-
-// type RouteHandler = (ctx: Context) => Response | Promise<Response>;
-
-// interface Route {
-//   method: string;
-//   pattern: string; // e.g. "/items/:id"
-//   handler: RouteHandler;
-// }
-
-// // very simple matcher for "/items/:id"
-// function matchPath(pattern: string, path: string): Record<string, string> | null {
-//   const patternParts = pattern.split("/").filter(Boolean);
-//   const pathParts = path.split("/").filter(Boolean);
-
-//   if (patternParts.length !== pathParts.length) {
-//     return null;
-//   }
-
-//   const params: Record<string, string> = {};
-
-//   for (let i = 0; i < patternParts.length; i++) {
-//     const p = patternParts[i];
-//     const segment = pathParts[i];
-
-//     if (p.startsWith(":")) {
-//       const key = p.slice(1);
-//       params[key] = decodeURIComponent(segment);
-//     } else if (p !== segment) {
-//       return null;
-//     }
-//   }
-
-//   return params;
-// }
-
-// // -------------------- Defining routes --------------------
-
-// const routes: Route[] = [];
-
-// // small helpers for registration
-// function GET(pattern: string, handler: RouteHandler) {
-//   routes.push({ method: "GET", pattern, handler });
-// }
-
-// function POST(pattern: string, handler: RouteHandler) {
-//   routes.push({ method: "POST", pattern, handler });
-// }
-
-// function PUT(pattern: string, handler: RouteHandler) {
-//   routes.push({ method: "PUT", pattern, handler });
-// }
-
-// function DELETE(pattern: string, handler: RouteHandler) {
-//   routes.push({ method: "DELETE", pattern, handler });
-// }
-
 // // ---- Routes ----
 
 // // Root
@@ -134,9 +56,6 @@
 //     docs: ["/health", "/items"],
 //   })
 // );
-
-// // Health check
-// GET("/health", () => json({ status: "ok" }));
 
 // // List items
 // GET("/items", () => json(items));
@@ -220,36 +139,20 @@
 //   return json({ deleted: removed.id });
 // });
 
-// // -------------------- Main handler + error handling --------------------
-
-// async function routeRequest(req: Request): Promise<Response> {
-//   const url = new URL(req.url);
-
-//   for (const route of routes) {
-//     if (route.method !== req.method) continue;
-//     const params = matchPath(route.pattern, url.pathname);
-//     if (!params) continue;
-
-//     const ctx: Context = { req, url, params };
-//     return await route.handler(ctx);
-//   }
-
-//   return notFound();
-// }
-
-async function mainHandler(_req: Request): Promise<Response> {
-    //   try {
-    //     return await routeRequest(req);
-    //   } catch (err) {
-    //     console.error("Unhandled error:", err);
-    //     return json({ error: "Internal Server Error" }, { status: 500 });
-    //   }
-
-    // TODO: replace with actual handler
-    return new Response("Hello from Deno!");
+// TODO: move it to handlers folder
+// Main handler with error handling
+async function mainHandler(req: Request): Promise<Response> {
+    try {
+        return await routeRequest(req);
+    } catch (error) {
+        console.error("!!! Unhandled error:", error);
+        return json({ error: "Internal Server Error" }, {
+            status: STATUS_CODE.InternalServerError,
+        });
+    }
 }
 
-// // -------------------- Start (local / Docker / Deno Deploy) --------------------
+// -------------------- Start (local / Docker / Deno Deploy) --------------------
 
 if (import.meta.main) {
     // If PORT exists (local / Docker), we use it.
