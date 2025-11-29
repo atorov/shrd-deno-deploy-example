@@ -41,9 +41,6 @@ import json from "./utils/routes/json.ts";
 //   })
 // );
 
-// // List items
-// GET("/items", () => json(items));
-
 // // Create item
 // POST("/items", async (ctx) => {
 //   let body: unknown;

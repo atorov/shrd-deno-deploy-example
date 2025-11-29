@@ -8,3 +8,7 @@ const items: Item[] = [
 export function getItemById(id: number): Promise<Item | null> {
     return Promise.resolve(items.find((item) => item.id === id) || null);
 }
+
+export function getAllItems(): Promise<Item[]> {
+    return Promise.resolve(items);
+}
