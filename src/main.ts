@@ -2,35 +2,6 @@ import { STATUS_CODE } from "@std/http/status";
 import routeRequest from "./router/route_request.ts";
 import json from "./utils/routes/json.ts";
 
-// // -------------------- Helper functions --------------------
-
-// // Basic validation for item payload
-// function validateItemPayload(body: unknown):
-//   | { ok: true; value: { name: string } }
-//   | { ok: false; errors: string[] } {
-//   const errors: string[] = [];
-
-//   if (typeof body !== "object" || body === null) {
-//     errors.push("Body must be a JSON object.");
-//   } else {
-//     const maybeName = (body as Record<string, unknown>).name;
-//     if (typeof maybeName !== "string") {
-//       errors.push("Field 'name' is required and must be a string.");
-//     } else if (maybeName.trim().length < 2) {
-//       errors.push("Field 'name' must be at least 2 characters long.");
-//     }
-//   }
-
-//   if (errors.length > 0) {
-//     return { ok: false, errors };
-//   }
-
-//   return {
-//     ok: true,
-//     value: { name: (body as any).name as string },
-//   };
-// }
-
 // // ---- Routes ----
 
 // // Root
@@ -40,27 +11,6 @@ import json from "./utils/routes/json.ts";
 //     docs: ["/health", "/items"],
 //   })
 // );
-
-// // Create item
-// POST("/items", async (ctx) => {
-//   let body: unknown;
-//   try {
-//     body = await ctx.req.json();
-//   } catch {
-//     return badRequest("Invalid JSON body.");
-//   }
-
-//   const validation = validateItemPayload(body);
-//   if (!validation.ok) {
-//     return badRequest(validation.errors.join(" "));
-//   }
-
-//   const id = items.length ? items[items.length - 1].id + 1 : 1;
-//   const item: Item = { id, name: validation.value.name.trim() };
-//   items.push(item);
-
-//   return json(item, { status: 201 });
-// });
 
 // // Update item
 // PUT("/items/:id", async (ctx) => {

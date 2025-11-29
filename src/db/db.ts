@@ -12,3 +12,13 @@ export function getItemById(id: number): Promise<Item | null> {
 export function getAllItems(): Promise<Item[]> {
     return Promise.resolve(items);
 }
+
+export function addItem(name: string): Promise<Item> {
+    const newItem: Item = {
+        id: items.length > 0 ? items[items.length - 1]!.id + 1 : 1,
+        name,
+    };
+    items.push(newItem);
+
+    return Promise.resolve(newItem);
+}
