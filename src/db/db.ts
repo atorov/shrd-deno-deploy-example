@@ -5,14 +5,6 @@ const items: Item[] = [
     { id: 2, name: "Second item" },
 ];
 
-export function getItemById(id: number): Promise<Item | null> {
-    return Promise.resolve(items.find((item) => item.id === id) || null);
-}
-
-export function getAllItems(): Promise<Item[]> {
-    return Promise.resolve(items);
-}
-
 export function addItem(name: string): Promise<Item> {
     const newItem: Item = {
         id: items.length > 0 ? items[items.length - 1]!.id + 1 : 1,
@@ -21,4 +13,22 @@ export function addItem(name: string): Promise<Item> {
     items.push(newItem);
 
     return Promise.resolve(newItem);
+}
+
+export function getItemById(id: number): Promise<Item | null> {
+    return Promise.resolve(items.find((item) => item.id === id) || null);
+}
+
+export function getAllItems(): Promise<Item[]> {
+    return Promise.resolve(items);
+}
+
+export function updateItem(id: number, name: string): Promise<Item | null> {
+    const item = items.find((item) => item.id === id);
+
+    if (!item) return Promise.resolve(null);
+
+    item.name = name;
+
+    return Promise.resolve(item);
 }

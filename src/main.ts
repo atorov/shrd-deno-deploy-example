@@ -12,35 +12,6 @@ import json from "./utils/routes/json.ts";
 //   })
 // );
 
-// // Update item
-// PUT("/items/:id", async (ctx) => {
-//   const id = Number(ctx.params.id);
-//   if (Number.isNaN(id)) {
-//     return badRequest("Invalid 'id' - must be a number.");
-//   }
-
-//   const existing = items.find((x) => x.id === id);
-//   if (!existing) {
-//     return notFound();
-//   }
-
-//   let body: unknown;
-//   try {
-//     body = await ctx.req.json();
-//   } catch {
-//     return badRequest("Invalid JSON body.");
-//   }
-
-//   const validation = validateItemPayload(body);
-//   if (!validation.ok) {
-//     return badRequest(validation.errors.join(" "));
-//   }
-
-//   existing.name = validation.value.name.trim();
-
-//   return json(existing);
-// });
-
 // // Delete item
 // DELETE("/items/:id", (ctx) => {
 //   const id = Number(ctx.params.id);

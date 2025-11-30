@@ -3,6 +3,7 @@ import getHealthHandler from "../handlers/health/get_helath.handler.ts";
 import getAllItemsHandler from "../handlers/items/get_all_items_handler.ts";
 import getSingleItemHandler from "../handlers/items/get_single_item.handler.ts";
 import postItemHandler from "../handlers/items/post_item_handler.ts";
+import putItemHandler from "../handlers/items/put_item_handler.ts";
 import type { RouteHandler } from "../types/RouteHnadler.ts";
 import type { Route } from "./types.ts";
 
@@ -26,6 +27,9 @@ registerRoute(METHOD.Post, "/api/items", postItemHandler);
 registerRoute(METHOD.Get, "/api/items", getAllItemsHandler);
 // - Get item
 registerRoute(METHOD.Get, "/api/items/:id", getSingleItemHandler);
-// { method: "PUT", pattern: "/items/:id", handler: updateItemHandler },
+// - Update item
+registerRoute(METHOD.Put, "/api/items/:id", putItemHandler);
+// - Delete item
+// registerRoute(METHOD.Delete, "/api/items/:id", deleteItemHandler);
 
 export default routes;
