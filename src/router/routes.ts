@@ -1,5 +1,6 @@
 import { METHOD, type Method } from "@std/http/unstable-method";
 import getHealthHandler from "../handlers/health/get_helath.handler.ts";
+import deleteItemHandler from "../handlers/items/delete_item_handler.ts";
 import getAllItemsHandler from "../handlers/items/get_all_items_handler.ts";
 import getSingleItemHandler from "../handlers/items/get_single_item.handler.ts";
 import postItemHandler from "../handlers/items/post_item_handler.ts";
@@ -30,6 +31,6 @@ registerRoute(METHOD.Get, "/api/items/:id", getSingleItemHandler);
 // - Update item
 registerRoute(METHOD.Put, "/api/items/:id", putItemHandler);
 // - Delete item
-// registerRoute(METHOD.Delete, "/api/items/:id", deleteItemHandler);
+registerRoute(METHOD.Delete, "/api/items/:id", deleteItemHandler);
 
 export default routes;

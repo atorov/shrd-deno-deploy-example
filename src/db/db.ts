@@ -15,6 +15,16 @@ export function addItem(name: string): Promise<Item> {
     return Promise.resolve(newItem);
 }
 
+export function deleteItem(id: number): Promise<null> {
+    const index = items.findIndex((item) => item.id === id);
+
+    if (index === -1) return Promise.resolve(null);
+
+    items.splice(index, 1);
+
+    return Promise.resolve(null);
+}
+
 export function getItemById(id: number): Promise<Item | null> {
     return Promise.resolve(items.find((item) => item.id === id) || null);
 }

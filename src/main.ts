@@ -12,22 +12,6 @@ import json from "./utils/routes/json.ts";
 //   })
 // );
 
-// // Delete item
-// DELETE("/items/:id", (ctx) => {
-//   const id = Number(ctx.params.id);
-//   if (Number.isNaN(id)) {
-//     return badRequest("Invalid 'id' - must be a number.");
-//   }
-
-//   const index = items.findIndex((x) => x.id === id);
-//   if (index === -1) {
-//     return notFound();
-//   }
-
-//   const [removed] = items.splice(index, 1);
-//   return json({ deleted: removed.id });
-// });
-
 // TODO: move it to handlers folder
 // Main handler with error handling
 async function mainHandler(req: Request): Promise<Response> {
