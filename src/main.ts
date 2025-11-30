@@ -2,8 +2,7 @@ import { STATUS_CODE } from "@std/http/status";
 import routeRequest from "./router/route_request.ts";
 import json from "./utils/routes/json.ts";
 
-// // ---- Routes ----
-
+// TODO: register root route in routes.ts
 // // Root
 // GET("/", (ctx) =>
 //   json({

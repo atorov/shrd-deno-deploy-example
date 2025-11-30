@@ -10,6 +10,7 @@ import type { Route } from "./types.ts";
 
 const routes: Route[] = [];
 
+// TODO: move to a separate file
 // A small helper for registering routes
 function registerRoute(method: Method, pattern: string, handler: RouteHandler) {
     routes.push({ method, pattern, handler });
