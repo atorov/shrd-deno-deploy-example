@@ -2,15 +2,6 @@ import { STATUS_CODE } from "@std/http/status";
 import routeRequest from "./router/route_request.ts";
 import json from "./utils/routes/json.ts";
 
-// TODO: register root route in routes.ts
-// // Root
-// GET("/", (ctx) =>
-//   json({
-//     message: "Hello from Deno REST API",
-//     docs: ["/health", "/items"],
-//   })
-// );
-
 // TODO: move it to handlers folder
 // Main handler with error handling
 async function mainHandler(req: Request): Promise<Response> {

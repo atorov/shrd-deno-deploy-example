@@ -1,6 +1,5 @@
-import { getAllItems } from "../../db/db.ts";
-import type RouteContext from "../../types/RouteContext.ts";
-import json from "../../utils/routes/json.ts";
+import { getAllItems } from "../../../db/db.ts";
+import json from "../../../utils/routes/json.ts";
 
 async function getAllItemsHandler(): Promise<Response> {
     const items = await getAllItems();

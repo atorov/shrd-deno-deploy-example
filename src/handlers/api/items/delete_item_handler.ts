@@ -1,7 +1,7 @@
-import { deleteItem, getItemById } from "../../db/db.ts";
-import type RouteContext from "../../types/RouteContext.ts";
-import badRequest from "../../utils/routes/bad_request.ts";
-import noContent from "../../utils/routes/no_content.ts";
+import { deleteItem, getItemById } from "../../../db/db.ts";
+import type RouteContext from "../../../types/RouteContext.ts";
+import badRequest from "../../../utils/routes/bad_request.ts";
+import noContent from "../../../utils/routes/no_content.ts";
 
 async function deleteItemHandler(ctx: RouteContext): Promise<Response> {
     const id = Number(ctx.params.id);

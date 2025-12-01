@@ -1,9 +1,9 @@
-import { getItemById, updateItem } from "../../db/db.ts";
-import ItemSchema from "../../db/ItemSchema.ts";
-import type RouteContext from "../../types/RouteContext.ts";
-import badRequest from "../../utils/routes/bad_request.ts";
-import json from "../../utils/routes/json.ts";
-import notFound from "../../utils/routes/not_found.ts";
+import { getItemById, updateItem } from "../../../db/db.ts";
+import ItemSchema from "../../../db/ItemSchema.ts";
+import type RouteContext from "../../../types/RouteContext.ts";
+import badRequest from "../../../utils/routes/bad_request.ts";
+import json from "../../../utils/routes/json.ts";
+import notFound from "../../../utils/routes/not_found.ts";
 
 async function putItemHandler(ctx: RouteContext): Promise<Response> {
     const id = Number(ctx.params.id);
