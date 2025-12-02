@@ -1,22 +1,6 @@
-import { STATUS_CODE } from "@std/http/status";
-import routeRequest from "./router/route_request.ts";
-import json from "./utils/routes/json.ts";
+import mainHandler from "./handlers/main/main.handler.ts";
 
-// TODO: move it to handlers folder
-// Main handler with error handling
-async function mainHandler(req: Request): Promise<Response> {
-    try {
-        return await routeRequest(req);
-    } catch (error) {
-        console.error("!!! Unhandled error:", error);
-        return json({ error: "Internal Server Error" }, {
-            status: STATUS_CODE.InternalServerError,
-        });
-    }
-}
-
-// -------------------- Start (local / Docker / Deno Deploy) --------------------
-
+// Start (local / Docker / Deno Deploy)
 if (import.meta.main) {
     // If PORT exists (local / Docker), we use it.
     // If not – Deno Deploy (and Deno by default) manage the port.
