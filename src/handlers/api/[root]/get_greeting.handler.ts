@@ -1,8 +1,9 @@
 import type { RouteHandler } from "../../../types/RouteHnadler.ts";
 import html from "../../../utils/routes/html.ts";
 
-const getGreetingHandler: RouteHandler = () =>
-    Promise.resolve(
+const getGreetingHandler: RouteHandler = () => {
+    console.log(`::: Handling greeting request`);
+    return Promise.resolve(
         html(
             `
         <!DOCTYPE html>
@@ -28,5 +29,6 @@ const getGreetingHandler: RouteHandler = () =>
             },
         ),
     );
+};
 
 export default getGreetingHandler;

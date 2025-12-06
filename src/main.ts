@@ -1,5 +1,7 @@
 import mainHandler from "./handlers/main/main.handler.ts";
 
+console.log("::: Application starting...");
+
 // Start (local / Docker / Deno Deploy)
 if (import.meta.main) {
     // If PORT exists (local / Docker), we use it.

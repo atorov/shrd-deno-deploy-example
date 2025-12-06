@@ -3,6 +3,8 @@ import routeRequest from "../../router/route_request.ts";
 import json from "../../utils/routes/json.ts";
 
 async function mainHandler(req: Request): Promise<Response> {
+    console.log(`::: Handling request: ${req.method} ${req.url}`);
+
     try {
         return await routeRequest(req);
     } catch (error) {

@@ -3,6 +3,8 @@ function matchPath(
     pattern: string,
     path: string,
 ): Record<string, string> | null {
+    console.log(`::: Matching path: pattern="${pattern}", path="${path}"`);
+
     const patternParts = pattern.split("/").filter(Boolean);
     const pathParts = path.split("/").filter(Boolean);
 
@@ -20,6 +22,7 @@ function matchPath(
         } else if (p !== segment) return null;
     }
 
+    console.log(`::: Matched params:`, params);
     return params;
 }
 
